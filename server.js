@@ -33,7 +33,7 @@ mongoose
     console.log("Database connection error: " + error);
   });
 // routes
-const pageRoute = require("./routes/userRoute");
+const pageRoute = require("./routers/userRoute");
 app.use("/", pageRoute);
 app.get("/", rateLimiter, (req, res) => {
   res.send(`server is running on http://localhost:${port}`);
