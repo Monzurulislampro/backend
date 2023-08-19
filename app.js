@@ -3,6 +3,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const createError = require("http-errors");
 const rateLimit = require("express-rate-limit");
+const bcrypt = require("bcryptjs");
 const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
@@ -32,8 +33,10 @@ mongoose
     console.log("Database connection error: " + error);
   });
 // routes
-const pageRoute = require("./routers/userRoute");
-app.use("/", pageRoute);
+const seedRouter = require("./src/routers/seeRouter");
+const userRouter = require("./src/routers/userRouter");
+app.use("/api/users", userRouter);
+app.use("/api/seed", seedRouter);
 app.get("/", rateLimiter, (req, res) => {
   res.send(`server is running on http://localhost:${port}`);
 });
